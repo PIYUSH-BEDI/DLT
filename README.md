@@ -74,6 +74,18 @@ contract MyToken {
         emit Approval(_owner, _spender, _value);
     }
 }
+//const MyToken = artifacts.require("MyToken");
+
+// module.exports = function (deployer) {
+//   const name = "My Token";
+//   const symbol = "MTK";
+//   const decimals = 18;
+//   const initialSupply = 1000000;
+
+//   deployer.deploy(MyToken, name, symbol, decimals, initialSupply);
+// };
+
+
 ```
 ### Exp-4 Basic Functions in Solidity
 ```
