@@ -133,23 +133,29 @@ contract BasicFunctions {
 ```
 ### Exp-6 Inheritance 
 ```
-pragma solidity ^0.8.0;
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.18;
 
+// Parent contract
 contract Parent {
-    uint256 public parentVariable;
-    
-    function modifyParentVariable(uint256 _value) public {
-        parentVariable = _value;
+    string public parentMessage;
+
+    constructor(string memory _message) {
+        parentMessage = _message;
     }
 }
 
+// Child contract inheriting from Parent contract
 contract Child is Parent {
-    uint256 public childVariable;
-    
-    function modifyParentVariable(uint256 _value) public override {
-        childVariable = _value;
+    string public childMessage;
+
+    constructor(string memory _parentMessage, string memory _childMessage)
+        Parent(_parentMessage)
+    {
+        childMessage = _childMessage;
     }
 }
+
 ```
 
 ### Exp-9 Different Data Locations
