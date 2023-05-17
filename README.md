@@ -219,6 +219,45 @@ contract DataLocations {
     }
 }
 ```
+### Exp-8 Merkle Tree
+```
+// SPDX-License-Identifier: UNLICENSED
+pragma solidity ^0.8.0;
+
+contract MerkleTree {
+    bytes32 private root;
+
+    constructor(bytes32[] memory leaves) {
+        require(leaves.length == 6, "Invalid number of leaves");
+
+        root = generateRoot(leaves);
+    }
+
+    function generateRoot(bytes32[] memory leaves) private pure returns (bytes32) {
+        bytes32[] memory nodes = new bytes32[](12);
+        for (uint256 i = 0; i < leaves.length; i++) {
+            nodes[i + 6] = leaves[i];
+        }
+
+        for (uint256 i = 5; i > 0; i--) {
+            nodes[i] = hash(nodes[i * 2] ^ nodes[i * 2 + 1]);
+        }
+
+        return nodes[1];
+    }
+
+    function hash(bytes32 data) private pure returns (bytes32) {
+        return sha256(abi.encodePacked(data));
+    }
+
+    function getRoot() public view returns (bytes32) {
+        return root;
+    }
+}
+
+
+Input to be put next to deploy button in remix: [     "0x1111111111111111111111111111111111111111111111111111111111111111",     "0x2222222222222222222222222222222222222222222222222222222222222222",     "0x3333333333333333333333333333333333333333333333333333333333333333",     "0x4444444444444444444444444444444444444444444444444444444444444444",     "0x5555555555555555555555555555555555555555555555555555555555555555",     "0x6666666666666666666666666666666666666666666666666666666666666666"   ]
+```
 
 ### Lab-10 Supply Chain Management 
 ```
